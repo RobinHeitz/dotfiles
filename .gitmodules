@@ -1,0 +1,3 @@
+[submodule "tmux-conf"]
+	path = tmux-conf
+	url = git@github.com:RobinHeitz/tmux-conf.git
