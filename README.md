@@ -1,4 +1,4 @@
-# Dotfiles (inspired by bartekspitza and https://www.youtube.com/watch?v=CF1tMjvHDRA&ab_channel=JoseanMartinez)
+# Dotfiles (inspired by bartekspitza and [this video](https://www.youtube.com/watch?v=CF1tMjvHDRA&ab_channel=JoseanMartinez)
 
 This repo contains all my configs/ dotfiles for easy setup. There are some OS specific things mentioned below.
 It includes
