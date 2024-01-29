@@ -44,11 +44,17 @@ done
 
 echo '# -------------- Robin:dotfiles install ---------------' >> $SH
 
-# Tmux conf
-# if ask "Do you want to install .tmux.conf?"; then
-#     ln -s "$(realpath ".tmux.conf")" ~/.tmux.conf
-# fi
-#
+#Tmux conf: Creates a soft link (ln -s) so that tmux can find the config under the desired path ~/.tmux.conf
+if ask "Do you want to install .tmux.conf?"; then
+    ln -s "$(realpath "tmux-conf/tmux.conf")" ~/.tmux.conf
+fi
+
+#p10k config: Creates a softlink to ~/.p10k.zsh
+if ask "Do you want to install existing .p10k.zsh?"; then
+    ln -s "$(realpath ".p10k.zsh")" ~/.p10k.zsh
+fi
+
+
 # # Vim conf
 # if ask "Do you want to install .vimrc?"; then
 #     ln -s "$(realpath ".vimrc")" ~/.vimrc
