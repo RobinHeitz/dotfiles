@@ -55,7 +55,7 @@ if ask "Do you want to install existing .p10k.zsh?"; then
 fi
 
 
-# # Vim conf
-# if ask "Do you want to install .vimrc?"; then
-#     ln -s "$(realpath ".vimrc")" ~/.vimrc
-# fi
+# Nvim config: Creates a softlink to ~/.config/nvim
+if ask "Do you want to install existing nvim config?"; then
+    ln -s "$(realpath "nvim-conf")" ~/.config/nvim
+fi
