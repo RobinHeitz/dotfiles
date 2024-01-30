@@ -37,7 +37,21 @@ Download zsh plugins
 ### Ubuntu
 
 Maybe some differences, Use Wezterm instead of iterm2
-Also, MesloGS NF Refular (font) needs to be installed manually.
+Also, MesloGS NF Regular (font) needs to be installed manually.
+
+#### Gnome Terminal
+
+Dump current config
+
+    dconf dump /org/gnome/terminal/legacy/profiles:/
+
+Dump to file:
+
+    dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
+
+Load Theme 'Coolnight'
+
+    dconf load /org/gnome/terminal/legacy/profiles:/ < coolnight.dconf
 
 ## Main Installation
 
