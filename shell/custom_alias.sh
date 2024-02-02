@@ -11,6 +11,7 @@ alias rc='nvim ~/.zshrc'
 alias rcs='source ~/.zshrc'
 
 # common
+alias cl='clear'
 alias l='ls -al'
 
 # docker

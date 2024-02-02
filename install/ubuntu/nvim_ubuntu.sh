@@ -15,14 +15,13 @@ chmod u+x nvim.appimage
 dconf load /org/gnome/terminal/legacy/profiles:/ < coolnight.dconf
 
 # extract
-nvim_dir=nvim_app
+nvim=nvim_app
 ./nvim.appimage --appimage-extract
 ./squashfs-root/AppRun --version
-mv squashfs-root $nvim_dir 
+mv squashfs-root $nvim 
 
 # exposing nvim globally.
-sudo mv $nvim_dir ~/Applications
-sudo ln -s ~/Applications/$nvim_dir/AppRun /usr/bin/nvim
+sudo ln -s ~/Applications/$nvim/AppRun /usr/bin/nvim
 
 cd $DOTFILES
 
@@ -30,7 +29,7 @@ cd $DOTFILES
 nvim_conf_dir=~/.config/nvim
 
 # Remove .tmux.conf if exists
-[ ! -e $nvim_conf_dir] || rm -r $nvim_conf_dir
+[ ! -e $nvim_conf_dir ] || rm -r $nvim_conf_dir
 
 # Create a soft link to ~/.tmux.conf
 ln -s $DOTFILES/nvim-conf/ $nvim_conf_dir
