@@ -12,7 +12,6 @@ cd Applications
 # Download
 curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
 chmod u+x nvim.appimage
-dconf load /org/gnome/terminal/legacy/profiles:/ < coolnight.dconf
 
 # extract
 nvim=nvim_app
@@ -22,6 +21,7 @@ mv squashfs-root $nvim
 
 # exposing nvim globally.
 sudo ln -s ~/Applications/$nvim/AppRun /usr/bin/nvim
+rm nvim.appimage
 
 cd $DOTFILES
 
