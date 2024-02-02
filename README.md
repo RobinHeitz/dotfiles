@@ -1,4 +1,24 @@
-# Dotfiles (inspired by bartekspitza and [this video](https://www.youtube.com/watch?v=CF1tMjvHDRA&ab_channel=JoseanMartinez)
+# Dotfiles - My setup inspired by [this video](https://www.youtube.com/watch?v=CF1tMjvHDRA&ab_channel=JoseanMartinez)
+
+## Installation
+
+Clone this repo & set env variable
+
+    git clone --recurse-submodules git@github.com:RobinHeitz/dotfiles.git .dotfiles
+
+    cd .dotfiles
+
+    export DOTFILES=$(pwd)
+
+Now, all installation scripts are within /install, just execute them. For OS-specific setups, there are subfolders mac and ubuntu.
+
+
+
+
+
+
+
+================================
 
 This repo contains all my configs/ dotfiles for easy setup. There are some OS specific things mentioned below.
 It includes

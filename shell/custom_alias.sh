@@ -15,5 +15,5 @@ alias l='ls -al'
 
 # docker
 alias di='docker images'
-alias dc='docker container -a'
+alias dc='docker container ls -a'
 
