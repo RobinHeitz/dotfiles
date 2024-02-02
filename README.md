@@ -12,6 +12,25 @@ Clone this repo & set env variable
 
 Now, all installation scripts are within /install, just execute them. For OS-specific setups, there are subfolders mac and ubuntu.
 
+Ubuntu:
+
+1) color scheme && restart terminal
+
+2) zsh 
+3) source ~/.zshrc, p10k config starts automatically, otherwise call p10k configure
+3) p10k configure
+
+4) nvim
+
+if nvim fails:
+remove ~/.local/share/nvim
+remove ~/.local/state/nvim
+~/.dotfiles/nvim-conf/plugin/packer_compiled.lua
+
+todo:
+items in nvim are not shown...
+
+
 
 
 
