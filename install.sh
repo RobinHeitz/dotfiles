@@ -36,6 +36,7 @@ if ask "Install all dependencies (git, package manager)? (Y/n)"; then
     cd ~/ && mkdir Applications && cd Applications
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
+    dconf load /org/gnome/terminal/legacy/profiles:/ < coolnight.dconf
   fi
 
   # Install Oh-my-zsh 

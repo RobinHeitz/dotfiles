@@ -10,3 +10,10 @@ alias gd='git diff'
 alias rc='nvim ~/.zshrc'
 alias rcs='source ~/.zshrc'
 
+# common
+alias l='ls -al'
+
+# docker
+alias di='docker images'
+alias dc='docker container -a'
+
