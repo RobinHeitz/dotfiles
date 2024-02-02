@@ -32,7 +32,7 @@ if ask "Install all dependencies (git, package manager)? (Y/n)"; then
     brew install neovim
 
   else 
-    sudo apt update && sudo apt install zsh tmux python3-dev python3-pip
+    sudo apt update && sudo apt install -y zsh tmux python3-dev python3-pip
     cd ~/ && mkdir Applications && cd Applications
     curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage
     chmod u+x nvim.appimage
