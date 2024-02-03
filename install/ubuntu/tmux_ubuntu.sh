@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# check $DOTFILES 
+source shell/util.sh
+check_dotfiles
+
 sudo apt update && sudo apt install -y tmux
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 

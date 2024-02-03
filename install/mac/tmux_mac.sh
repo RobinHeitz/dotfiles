@@ -1,6 +1,11 @@
 #!/bin/bash
 
+# check $DOTFILES 
+source shell/util.sh
+check_dotfiles
+
 brew install tmux 
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 echo "Your DOTFILES points to $DOTFILES"
 

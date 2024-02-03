@@ -2,116 +2,104 @@
 
 ## Installation
 
+There are several install/ setup scripts in ./install, ./install/mac and ./install/ubuntu.
+
 Clone this repo & set env variable
 
     git clone --recurse-submodules git@github.com:RobinHeitz/dotfiles.git .dotfiles
 
     cd .dotfiles
 
-    export DOTFILES=$(pwd)
-
-Now, all installation scripts are within /install, just execute them. For OS-specific setups, there are subfolders mac and ubuntu.
-
-Ubuntu:
-
-1) color scheme && restart terminal
-
-2) zsh 
-3) source ~/.zshrc, p10k config starts automatically, otherwise call p10k configure
-3) p10k configure
-
-4) nvim
-
-if nvim fails:
-remove ~/.local/share/nvim
-remove ~/.local/state/nvim
-~/.dotfiles/nvim-conf/plugin/packer_compiled.lua
-
-todo:
-items in nvim are not shown...
-
-
-
-
-
-
-
-
-================================
-
-This repo contains all my configs/ dotfiles for easy setup. There are some OS specific things mentioned below.
-It includes
-
-- zshrc setup
-- tmux configuration
-
-## Installation
-
-### Mac
-
-Clone this repo
-
-    git clone --recurse-submodules git@github.com:RobinHeitz/dotfiles.git .dotfiles
-
-Using iTerm2
-
-    brew install --cask iterm2
-
-Install Oh-My-Zsh
-
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-PowerLevel10k (Theme)
-
-    git clone https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
-
-Set iterm color profile:
-Open iTerm2 settings -> Profiles -> Colors -> Color Preset (bottom right corner) -> Import -> coolnight.itermcolors
-
-Download zsh plugins
-
-    git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    source ./dotfiles.sh
 
 ### Ubuntu
 
-Maybe some differences, Use Wezterm instead of iterm2
-Also, MesloGS NF Regular (font) needs to be installed manually.
+#### Color scheme setup:
 
-#### Gnome Terminal
+    ./install/ubuntu/color_theme.sh
 
-Dump current config
+(Don't forget to run ‘source ./dotfiles.sh‘ again.)
+
+To inspect the the config of the standard gnome terminal:
 
     dconf dump /org/gnome/terminal/legacy/profiles:/
-
-Dump to file:
-
     dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
 
-Load Theme 'Coolnight'
+(Use the second one to dump into a file)
 
-    dconf load /org/gnome/terminal/legacy/profiles:/ < coolnight.dconf
+#### Install & setup zsh including oh-my-zsh and plugins:
 
-## Main Installation
+    ./install/ubuntu/zsh_ubuntu.sh
 
-Since we have all dependencies now, we need to run the install script once
+source .zshrc afterwards & powerlevel10k setup assistant should automatically start:
 
-    cd to .dofiles (cloned in first step)
-    ./install.sh
+    source ~/.zshrc
 
-This will add softlinks for some config files as well as adds source cmds to our scripts inside /shell to zshrc.
+If it does not, start the setup manual:
 
-## Additional steps
+    p10k configure
 
-### Tmux
+#### Tmux
 
-To install 3rd party plugins, there are some shortcuts:
+    ./install/ubuntu/tmux_ubuntu.sh
 
-Install package with tpm:
-prefix (ctrl a) + I
+The prefix is set to CTRL-a.
+Here are some shortcuts:
 
-Update:
-prefix + U
+1. Install: prefix + I
+1. Update: prefix + U
+1. Remove all plugins: prefix + alt + u
 
-remove plugins
-prefix + alt + u
+#### Nvim
+
+    ./install/ubuntu/nvim_ubuntu.sh
+
+If nvim fails, try to remove the packages & config and do it again:
+
+    rm ~/.local/share/nvim
+    rm ~/.local/state/nvim
+    rm $DOTFILES/nvim-conf/plugin/packer_compiled.lua
+
+### Mac
+
+#### Install & setup iTerm2, zsh and oh-my-zsh (+ plugins):
+
+This will install zsh and iterm2 as emulator.
+
+    ./install/ubuntu/zsh_ubuntu.sh
+
+Close the terminal and open ‘iTerm2‘ instead.
+
+    source ~/.zshrc
+
+source .zshrc afterwards & powerlevel10k setup assistant should automatically start.
+
+If it does not, start the setup manual:
+
+    p10k configure
+
+### Setup iTerm2 Color Theme
+
+Didn't found a way to do this automatically.
+Open iTerm2 settings -> Profiles -> Colors -> Color Preset (bottom right corner) -> Import -> coolnight.itermcolors
+
+#### Tmux
+
+    ./install/ubuntu/tmux_ubuntu.sh
+
+The prefix is set to CTRL-a.
+Here are some shortcuts:
+
+1. Install: prefix + I
+1. Update: prefix + U
+1. Remove all plugins: prefix + alt + u
+
+#### Nvim
+
+    ./install/ubuntu/nvim_ubuntu.sh
+
+If nvim fails, try to remove the packages & config and do it again:
+
+    rm ~/.local/share/nvim
+    rm ~/.local/state/nvim
+    rm $DOTFILES/nvim-conf/plugin/packer_compiled.lua
