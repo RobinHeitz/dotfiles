@@ -1,105 +1,114 @@
 # Dotfiles - My setup inspired by [this video](https://www.youtube.com/watch?v=CF1tMjvHDRA&ab_channel=JoseanMartinez)
 
-## Installation
+This repo contains a step-by-step installation guide for setting up my system.
 
-There are several install/ setup scripts in ./install, ./install/mac and ./install/ubuntu.
+## SSH Keys
 
-Clone this repo & set env variable
+```
+ssh-keygen -t ed25519 -C "your_email@example.com"
+ssh-add ~/.ssh/my_file
+```
 
-    git clone --recurse-submodules git@github.com:RobinHeitz/dotfiles.git .dotfiles
+Clone repo
 
-    cd .dotfiles
+```
+    cd ~/.config
+    git clone git@github.com:RobinHeitz/dotfiles.git
+```
 
-    source ./dotfiles.sh
+## ZSH setup (might differ for Mac OS)
+Install the fonts first.
 
-### Ubuntu
+```
+sudo apt update && sudo apt install zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
 
-#### Color scheme setup:
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
 
-    ./install/ubuntu/color_theme.sh
+Configure oh-my-zsh with `p10k configre`
 
-(Don't forget to run ‘source ./dotfiles.sh‘ again.)
+Add these two lines to `~/.zshrc`:
 
-To inspect the the config of the standard gnome terminal:
+```
+ZSH_THEME="powerlevel10k/powerlevel10k"
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
+```
 
-    dconf dump /org/gnome/terminal/legacy/profiles:/
-    dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
 
-(Use the second one to dump into a file)
+Load  or dump terminal color scheme:
+```
+dconf load /org/gnome/terminal/legacy/profiles:/ < ../../coolnight.dconf
+dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
+```
 
-#### Install & setup zsh including oh-my-zsh and plugins:
+## Nvim setup
 
-    ./install/ubuntu/zsh_ubuntu.sh
+Install dependencies
+```
+sudo apt install python3-pip python3-venv -y
+```
 
-source .zshrc afterwards & powerlevel10k setup assistant should automatically start:
+Install Lazygit
+```
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit -D -t /usr/local/bin/
+```
 
-    source ~/.zshrc
+```
+curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+sudo tar -C /opt -xzf nvim-linux64.tar.gz
+sudo ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin
+```
 
-If it does not, start the setup manual:
+Clone `nvim-conf` repo and auto-install nvim plugins (with lazy)
+```
+cd ~/.config && git clone git@github.com:RobinHeitz/nvim-conf.git nvim
+nvim
+```
 
-    p10k configure
+Install rust, golang, nodejs:
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Restart shell after
 
-#### Tmux
+# Golang
+# Install latest version from website
+cd ~/Downloads && sudo tar -C /usr/local -xzf go1.23.3.linux-amd64.tar.gz
 
-    ./install/ubuntu/tmux_ubuntu.sh
+# Node22
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
+source ~/.zshrc
+nvm install 22
+```
 
-The prefix is set to CTRL-a.
-Here are some shortcuts:
+Append to .zshrc:
+```
+export PATH=$PATH:/usr/local/go/bin
+```
 
-1. Install: prefix + I
-1. Update: prefix + U
-1. Remove all plugins: prefix + alt + u
 
-#### Nvim
+## Tmux setup
 
-    ./install/ubuntu/nvim_ubuntu.sh
+```
+sudo apt install tmux
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
-If nvim fails, try to remove the packages & config and do it again:
+cd ~/.config && git clone git@github.com:RobinHeitz/tmux-conf.git tmux
+```
 
-    rm ~/.local/share/nvim
-    rm ~/.local/state/nvim
-    rm $DOTFILES/nvim-conf/plugin/packer_compiled.lua
+Install plugins via tpm by either
+```
+# start tmux with 'tmux'
+C-a C-I
+# or execute script:
+~/.config/tmux/plugins/tpm/scripts/install_plugins.sh
+```
 
-### Mac
 
-#### Install & setup iTerm2, zsh and oh-my-zsh (+ plugins):
 
-This will install zsh and iterm2 as emulator.
 
-    ./install/ubuntu/zsh_ubuntu.sh
-
-Close the terminal and open ‘iTerm2‘ instead.
-
-    source ~/.zshrc
-
-source .zshrc afterwards & powerlevel10k setup assistant should automatically start.
-
-If it does not, start the setup manual:
-
-    p10k configure
-
-### Setup iTerm2 Color Theme
-
-Didn't found a way to do this automatically.
-Open iTerm2 settings -> Profiles -> Colors -> Color Preset (bottom right corner) -> Import -> coolnight.itermcolors
-
-#### Tmux
-
-    ./install/ubuntu/tmux_ubuntu.sh
-
-The prefix is set to CTRL-a.
-Here are some shortcuts:
-
-1. Install: prefix + I
-1. Update: prefix + U
-1. Remove all plugins: prefix + alt + u
-
-#### Nvim
-
-    ./install/ubuntu/nvim_ubuntu.sh
-
-If nvim fails, try to remove the packages & config and do it again:
-
-    rm ~/.local/share/nvim
-    rm ~/.local/state/nvim
-    rm $DOTFILES/nvim-conf/plugin/packer_compiled.lua
