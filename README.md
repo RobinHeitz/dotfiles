@@ -12,12 +12,22 @@ ssh-add ~/.ssh/my_file
 Clone repo
 
 ```
-    cd ~/.config
-    git clone git@github.com:RobinHeitz/dotfiles.git
+cd ~/.config
+git clone git@github.com:RobinHeitz/dotfiles.git
 ```
 
 ## ZSH setup (might differ for Mac OS)
-Install the fonts first.
+
+Install the fonts first located at ./fonts
+
+Then, load  or dump terminal color scheme and activate the font.
+
+```
+dconf load /org/gnome/terminal/legacy/profiles:/ < ../../coolnight.dconf
+dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
+```
+
+ZSH Installation
 
 ```
 sudo apt update && sudo apt install zsh
@@ -37,21 +47,16 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 ```
 
-
-Load  or dump terminal color scheme:
-```
-dconf load /org/gnome/terminal/legacy/profiles:/ < ../../coolnight.dconf
-dconf dump /org/gnome/terminal/legacy/profiles:/ > myfile.dconf
-```
-
 ## Nvim setup
 
 Install dependencies
+
 ```
 sudo apt install python3-pip python3-venv -y
 ```
 
 Install Lazygit
+
 ```
 LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | \grep -Po '"tag_name": *"v\K[^"]*')
 curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v${LAZYGIT_VERSION}/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
@@ -66,12 +71,14 @@ sudo ln -s /opt/nvim-linux64/bin/nvim /usr/local/bin
 ```
 
 Clone `nvim-conf` repo and auto-install nvim plugins (with lazy)
+
 ```
 cd ~/.config && git clone git@github.com:RobinHeitz/nvim-conf.git nvim
 nvim
 ```
 
 Install rust, golang, nodejs:
+
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 # Restart shell after
@@ -87,10 +94,10 @@ nvm install 22
 ```
 
 Append to .zshrc:
+
 ```
 export PATH=$PATH:/usr/local/go/bin
 ```
-
 
 ## Tmux setup
 
@@ -102,13 +109,10 @@ cd ~/.config && git clone git@github.com:RobinHeitz/tmux-conf.git tmux
 ```
 
 Install plugins via tpm by either
+
 ```
 # start tmux with 'tmux'
 C-a C-I
 # or execute script:
 ~/.config/tmux/plugins/tpm/scripts/install_plugins.sh
 ```
-
-
-
-
